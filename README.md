@@ -6,7 +6,7 @@ For example, take this code below:
 ```js
 setTimeout(() => console.log(someVariable), 5);
 
-if(Math.random() > 0.5) {
+if (true) {
     var someVar = 100;
     let someVariable = 5;
     console.log(someVariable);
