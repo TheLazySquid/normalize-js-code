@@ -1,0 +1,133 @@
+Basic Renaming
+==
+let var1, var2 = 15;
+==
+let a, b = 15;
+====
+Let Block Scoping
+==
+if (true) {
+    let var1 = 15;
+}
+let var2 = 15;
+==
+if (true) {
+    let a = 15;
+}
+let a = 15;
+====
+Retroactive Var Declaration
+==
+setTimeout(() => console.log(var1));
+var var1 = 15;
+==
+setTimeout(() => console.log(_a));
+var _a = 15;
+====
+Don't Touch Globals
+==
+console.log();
+==
+console.log();
+====
+Function parameters
+==
+function func(var1, var2) {
+    console.log(var1, var2);
+}
+func(1, 2);
+==
+function a(b, c) {
+    console.log(b, c);
+}
+a(1, 2);
+====
+Variable Function Scoping
+==
+(function () {
+    var var1 = 15;
+}());
+if (true) {
+    var var3 = 15;
+}
+var var2 = 15;
+console.log(var3);
+==
+(function () {
+    var a = 15;
+}());
+if (true) {
+    var a = 15;
+}
+var b = 15;
+console.log(a);
+====
+Let Outside Arrow Function With Var
+==
+(function () {
+    let var1;
+    var arrow = () => {
+        var var1 = 15;
+        var1;
+    };
+});
+==
+(function () {
+    let a;
+    var b = () => {
+        var c = 15;
+        c;
+    };
+});
+====
+Arrow Functions
+==
+const arrow = (var1, var2) => {
+    var1, var2;
+};
+arrow();
+==
+const a = (b, c) => {
+    b, c;
+};
+a();
+====
+Code in README
+==
+setTimeout(() => console.log(someVariable), 5);
+if (true) {
+    var someVar = 100;
+    let someVariable = 5;
+    console.log(someVariable);
+}
+let someVariable = 'apple';
+console.log(someVar);
+==
+setTimeout(() => console.log(_b), 5);
+if (true) {
+    var a = 100;
+    let b = 5;
+    console.log(b);
+}
+let _b = 'apple';
+console.log(a);
+====
+Multiple Retroactive Declarations For Same Var
+==
+(function () {
+    (function () {
+        setTimeout(() => console.log(var1), 50);
+    }());
+    var var1 = 5;
+}());
+var var2;
+var var1 = 10;
+==
+(function () {
+    (function () {
+        setTimeout(() => console.log(_a), 50);
+    }());
+    var _a = 5;
+}());
+var a;
+var b = 10;
