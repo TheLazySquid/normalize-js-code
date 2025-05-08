@@ -1,6 +1,6 @@
-# normalize-js
+# normalize-js-code
 
-normalize-js takes javascript code and attempts to normalize it as much as possible by changing variable names in a predictable way. This is useful for comparing minified code, which has short, meaningless variable names that can change unpredictably between builds.
+normalize-js-code takes javascript code and attempts to normalize it as much as possible by changing variable names in a predictable way. This is useful for comparing minified code, which has short, meaningless variable names that can change unpredictably between builds.
 
 For example, take this code below:
 ```js
@@ -32,7 +32,7 @@ The code outputted will be the same regardless of the names of the variables tha
 ## Usage
 
 ```js
-import { normalizeJs } from "normalize-js";
+import { normalizeJs } from "normalize-js-code";
 
 const code = `let test = 'hello';`
 
