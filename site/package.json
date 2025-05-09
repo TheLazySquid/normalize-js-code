@@ -13,7 +13,7 @@
     "@astrojs/svelte": "^7.0.13",
     "@tailwindcss/vite": "^4.1.5",
     "astro": "^5.7.12",
-    "normalize-js-code": "^1.0.0",
+    "normalize-js-code": "workspace:*",
     "prism-code-editor": "^3.4.0",
     "prismjs": "^1.30.0",
     "svelte": "^5.28.2",

@@ -25,7 +25,7 @@
         "@astrojs/svelte": "^7.0.13",
         "@tailwindcss/vite": "^4.1.5",
         "astro": "^5.7.12",
-        "normalize-js-code": "^1.0.0",
+        "normalize-js-code": "workspace:*",
         "prism-code-editor": "^3.4.0",
         "prismjs": "^1.30.0",
         "svelte": "^5.28.2",
@@ -867,8 +867,6 @@
     "anymatch/picomatch": ["picomatch@2.3.1", "", {}, "sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA=="],
 
     "hast-util-to-parse5/property-information": ["property-information@6.5.0", "", {}, "sha512-PgTgs/BlvHxOu8QuEN7wi5A0OmXaBcHpmCSTehcs6Uuu9IkDIEo13Hy7n898RHfrQ49vKCoGeWZSaAK01nwVig=="],
-
-    "normalize-js-code-site/normalize-js-code": ["normalize-js-code@1.0.0", "", { "dependencies": { "acorn": "^8.14.1", "acorn-walk": "^8.3.4", "escodegen": "^2.1.0" }, "peerDependencies": { "typescript": "^5" } }, "sha512-WvI1f7Sfb0VrcWl7NFRVBw21rjylRsLEiNt1JJW8ayMEakY8wvY6JMGPun+rHIFJxcCynMG2CAaPoI7Aau2gHw=="],
 
     "prompts/kleur": ["kleur@3.0.3", "", {}, "sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w=="],
 
