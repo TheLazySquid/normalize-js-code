@@ -1,3 +1,5 @@
+name: Publish Package on NPM
+
 on:
   push:
     branches: ['main']
