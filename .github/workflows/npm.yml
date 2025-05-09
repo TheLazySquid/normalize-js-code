@@ -1,7 +1,7 @@
 on:
   push:
     branches: ['main']
-    paths: ['lib']
+    paths: ['lib/**']
   workflow_dispatch:
   
 jobs:
