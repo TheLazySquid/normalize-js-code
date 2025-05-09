@@ -1,21 +1,20 @@
 on:
-    push:
-        branches: main
-        paths:
-          - lib
-    workflow_dispatch:
+  push:
+    branches: ['main']
+    paths: ['lib']
+  workflow_dispatch:
   
 jobs:
-    publish:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v4
-        - uses: oven-sh/setup-bun@v2
-          with:
-            bun-version: latest
-        - run: bun i --frozen-lockfile
-        - run: bun run build
-        - uses: JS-DevTools/npm-publish@v3
-          with:
-            package: lib
-            token: ${{ secrets.NPM_TOKEN }}
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun i --frozen-lockfile
+      - run: bun run build
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          package: lib
+          token: ${{ secrets.NPM_TOKEN }}
