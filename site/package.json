@@ -1,0 +1,26 @@
+{
+  "name": "normalize-js-code-site",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^7.0.13",
+    "@tailwindcss/vite": "^4.1.5",
+    "astro": "^5.7.12",
+    "normalize-js-code": "workspace:*",
+    "prism-code-editor": "^3.4.0",
+    "prismjs": "^1.30.0",
+    "svelte": "^5.28.2",
+    "tailwindcss": "^4.1.5",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/prismjs": "^1.26.5"
+  }
+}

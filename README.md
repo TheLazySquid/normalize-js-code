@@ -27,7 +27,7 @@ let _b = 'apple';
 console.log(a);
 ```
 
-The code outputted will be the same regardless of the names of the variables that are inputted, or how it is formatted.
+The code outputted will be the same regardless of the names of the variables that are inputted, or how it is formatted. If you want around to play with this normalization check out the [demo](https://thelazysquid.github.io/normalize-js-code).
 
 ## Usage
 

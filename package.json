@@ -1,25 +1,15 @@
 {
-  "name": "normalize-js-code",
   "version": "1.0.0",
   "description": "Normalize javascript code to remove randomness introduced by bundling",
   "main": "dist/index.js",
   "type": "module",
-  "scripts": {
-    "build": "tsc"
-  },
-  "files": [
-    "dist"
+  "private": true,
+  "workspaces": [
+    "lib",
+    "site"
   ],
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/escodegen": "^0.0.10"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "acorn": "^8.14.1",
-    "acorn-walk": "^8.3.4",
-    "escodegen": "^2.1.0"
+  "scripts": {
+    "build": "cd lib && bun run build",
+    "site": "cd site && bun run dev"
   }
 }
