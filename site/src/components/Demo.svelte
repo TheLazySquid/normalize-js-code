@@ -84,24 +84,41 @@
             createEditors();
         }
     }
+
+    let width: number = $state(1920);
 </script>
 
+<svelte:window bind:innerWidth={width} />
+
 <div class="w-screen h-screen bg-gray-950 relative">
-    <div class="absolute top-4 left-8 text-white flex items-center gap-2">
-        <input type="checkbox" onclick={toggleTextarea} />
-        Use basic textarea? (Much faster)
-    </div>
-    <div class="grid grid-cols-2 p-8 pt-4 gap-x-8 gap-y-1 h-full"
-    style="grid-template-rows: auto auto 1fr;">
-        <div class="col-span-2 flex items-center justify-center">
+    {#if width > 768}
+        <div class="absolute top-4 left-8 text-white flex items-center gap-2">
+            <input type="checkbox" onclick={toggleTextarea} />
+            Use basic textarea? (Much faster)
+        </div>
+    {/if}
+    <div class="grid grid-cols-1 md:grid-cols-2 p-8 pt-4 gap-x-8 gap-y-1 h-full"
+    style="grid-template-rows: {width > 768 ? "auto auto 1fr" : "auto auto auto 1fr auto 1fr"}">
+        {#if width <= 768}
+            <div class="w-full text-white flex items-center justify-center gap-2">
+                <input type="checkbox" onclick={toggleTextarea} />
+                Use basic textarea? (Much faster)
+            </div>
+        {/if}
+        <div class="md:col-span-2 flex items-center justify-center">
             <button class="text-white bg-green-700 rounded-lg p-2 px-5 cursor-pointer"
             onclick={normalize}>
                 Normalize &gt;
             </button>
         </div>
         <div class="text-white text-xl text-center">Input</div>
-        <div class="text-white text-xl text-center">Output</div>
+        {#if width > 768}
+            <div class="text-white text-xl text-center">Output</div>
+        {/if}
         <div class="overflow-y-auto" bind:this={editorDiv}></div>
+        {#if width <= 768}
+            <div class="text-white text-xl text-center">Output</div>
+        {/if}
         <div class="overflow-y-auto" class:error={error} bind:this={outputDiv}></div>
     </div>
 </div>
