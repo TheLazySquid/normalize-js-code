@@ -1,6 +1,7 @@
 <script lang="ts">
     import { normalizeJs } from "normalize-js-code";
     import { onMount } from "svelte";
+    import Copy from "@lucide/svelte/icons/copy";
     
     import { createEditor } from "prism-code-editor";
     import { matchBrackets } from "prism-code-editor/match-brackets"
@@ -9,7 +10,6 @@
     import "prism-code-editor/layout.css";
     import "prism-code-editor/scrollbar.css";
     import "prism-code-editor/themes/github-dark.css";
-    import { isFunctionDeclaration } from "typescript";
 
     let editorValue = "let test = 'hello';";
     let outputValue = "let a = 'hello';";
@@ -86,6 +86,10 @@
     }
 
     let width: number = $state(1920);
+
+    function copy() {
+        navigator.clipboard.writeText(outputValue);
+    }
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -119,7 +123,11 @@
         {#if width <= 768}
             <div class="text-white text-xl text-center">Output</div>
         {/if}
-        <div class="overflow-y-auto" class:error={error} bind:this={outputDiv}></div>
+        <div class="overflow-y-auto relative" class:error={error} bind:this={outputDiv}>
+            <button class="absolute top-1 right-1 z-50 cursor-pointer" onclick={copy}>
+                <Copy color="white" size={18} />
+            </button>
+        </div>
     </div>
 </div>
 

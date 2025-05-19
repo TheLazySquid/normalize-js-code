@@ -16,7 +16,7 @@ for(let str of cases) {
 
 // run it on all of three.js, see what happens
 test("Normalize Three.js", async () => {
-    let threeFile = Bun.file(join(__dirname, "..", "node_modules", ".test", "three.js"));
+    let threeFile = Bun.file(join(__dirname, "..", "..", "node_modules", ".test", "three.js"));
     let three: string;
 
     if(await threeFile.exists()) {
