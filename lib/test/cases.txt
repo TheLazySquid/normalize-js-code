@@ -131,3 +131,22 @@ var var1 = 10;
 }());
 var a;
 var b = 10;
+====
+Object Destructuring
+==
+const { someVar, otherVar: newName } = someObject;
+console.log(someVar, newName);
+==
+const {
+    someVar: a,
+    otherVar: b
+} = someObject;
+console.log(a, b);
+====
+Array Destructuring
+==
+const [ var1, var2 ] = someArray;
+console.log(var1, var2);
+==
+const [a, b] = someArray;
+console.log(a, b);

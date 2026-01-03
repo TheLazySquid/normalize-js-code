@@ -77,6 +77,13 @@ export function normalizeAst(ast: acorn.Program) {
 		}
 
 		let parent = ancestors[ancestors.length - 2];
+		
+		// Disable shorthand for destructuring
+		if(parent.type === "ObjectPattern") {
+			for(let prop of (parent as acorn.ObjectPattern).properties) {
+				(prop as acorn.Property).shorthand = false;
+			}
+		}
 
 		if(
 			(parent.type.endsWith("Pattern")) ||

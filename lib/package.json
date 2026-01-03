@@ -1,6 +1,6 @@
 {
   "name": "normalize-js-code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Normalize javascript code to remove randomness introduced by bundling",
   "main": "dist/index.js",
   "type": "module",
