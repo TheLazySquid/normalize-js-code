@@ -10,6 +10,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheLazySquid/normalize-js-code"  
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/escodegen": "^0.0.10"
