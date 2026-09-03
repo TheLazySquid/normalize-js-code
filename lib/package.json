@@ -12,14 +12,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLazySquid/normalize-js-code.git"  
+    "url": "git+https://github.com/TheLazySquid/normalize-js-code.git"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/escodegen": "^0.0.10"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "acorn": "^8.14.1",

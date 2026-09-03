@@ -150,3 +150,73 @@ console.log(var1, var2);
 ==
 const [a, b] = someArray;
 console.log(a, b);
+====
+Imports
+==
+import { var1, var2 } from "mod1";
+import { var3 as var4, var5 } from "mod2";
+import * as var6 from "mod3";
+import var7 from "mod4";
+import var8, { var9 as var10 } from "mod5";
+console.log(var1, var2, var4, var5, var6, var7, var8, var10);
+==
+import {
+    var1 as a,
+    var2 as b
+} from 'mod1';
+import {
+    var3 as c,
+    var5 as d
+} from 'mod2';
+import * as e from 'mod3';
+import f from 'mod4';
+import g, { var9 as h } from 'mod5';
+console.log(a, b, c, d, e, f, g, h);
+====
+Exports
+==
+const thing = 5;
+export default thing;
+export { thing };
+export { thing as newName };
+export const thing2 = 10;
+export function thing3() {}
+export class thing4 {}
+export let { thing5, thing6: newName2, thing7: { thing8, thing9 } } = someObject;
+==
+const a = 5;
+export default a;
+export {
+    a as thing
+};
+export {
+    a as newName
+};
+const b = 10;
+export {
+    b as thing2
+};
+function c() {
+}
+export {
+    c as thing3
+};
+class d {
+}
+export {
+    d as thing4
+};
+let {
+    thing5: e,
+    thing6: f,
+    thing7: {
+        thing8: g,
+        thing9: h
+    }
+} = someObject;
+export {
+    e as thing5,
+    f as newName2,
+    g as thing8,
+    h as thing9
+};

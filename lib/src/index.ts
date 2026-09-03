@@ -14,6 +14,15 @@ export function normalizeJs(code: string) {
 	return generate(ast);
 }
 
+console.log(normalizeJs(`const thing = 5;
+export default thing;
+export { thing };
+export { thing as newName };
+export const thing2 = 10;
+export function thing3() {}
+export class thing4 {}
+export let { thing5, thing6: newName2, thing7: { thing8, thing9 } } = someObject;`))
+
 export function normalizeAst(ast: acorn.Program) {
 	let names: string[] = [];
 	let nameNumber = 0;
@@ -44,12 +53,12 @@ export function normalizeAst(ast: acorn.Program) {
 	}
 
 	let scopes: Scope[] = [{ node: ast, nameIndex: 0, names: new Map(), unassignedIdentifiers: new Map() }];
-	
+	let pendingExports: string[] = [];
+
 	const Identifier = (node: acorn.Identifier, _: never, ancestors: acorn.Node[]) => {
 		let declaration = false;
 
 		// Find the first shared ancestor
-		let ancestor = ancestors[0];
 		let scopesIndex = 0;
 		let ancestorIndex = 0;
 		for(let i = ancestors.length - 1; i >= 1; i--) {
@@ -59,7 +68,6 @@ export function normalizeAst(ast: acorn.Program) {
 			let index = scopes.findIndex(s => s.node === node);
 			if(index === -1) continue;
 			
-			ancestor = node;
 			scopesIndex = index;
 			ancestorIndex = i;
 			break;
@@ -92,7 +100,8 @@ export function normalizeAst(ast: acorn.Program) {
 			(parent.type === "FunctionDeclaration" && (parent as acorn.FunctionDeclaration).params.includes(node)) ||
 			(parent.type === "FunctionExpression" && (parent as acorn.FunctionExpression).params.includes(node)) ||
 			(parent.type === "ArrowFunctionExpression" && (parent as acorn.ArrowFunctionExpression).params.includes(node)) ||
-			(parent.type === "ClassDeclaration" && (parent as acorn.ClassDeclaration).id === node)
+			(parent.type === "ClassDeclaration" && (parent as acorn.ClassDeclaration).id === node) ||
+			(parent.type === "ImportDeclaration")
 		) {
 			declaration = true;
 		}
@@ -146,6 +155,10 @@ export function normalizeAst(ast: acorn.Program) {
 				}
 			}
 
+			if(ancestors[1].type === "ExportNamedDeclaration") {
+				pendingExports.push(node.name);
+			}
+
 			scope.names.set(node.name, name);
 			node.name = name;
 		} else {
@@ -172,6 +185,60 @@ export function normalizeAst(ast: acorn.Program) {
 		Pattern(node, _, ancestors) {
 			if(node.type !== "Identifier") return;
 			Identifier(node, _, ancestors);
+		},
+		ImportSpecifier(node, _, ancestors) {
+			// Prevent imported and local being references to the same object
+			node.imported = { ...node.imported };
+			Identifier(node.local, _, ancestors);
+		},
+		ImportDefaultSpecifier(node, _, ancestors) {
+			Identifier(node.local, _, ancestors);
+		},
+		ImportNamespaceSpecifier(node, _, ancestors) {
+			Identifier(node.local, _, ancestors);
+		},
+		ExportNamedDeclaration(node, _, ancestors) {
+			for(const specifier of node.specifiers) {
+				if(specifier.local.type !== "Identifier") continue;
+				specifier.exported = { ...specifier.exported };
+				Identifier(specifier.local, _, ancestors);
+			}
+
+			if(!node.declaration) return;
+
+			const index = ast.body.indexOf(node);
+			if(index === -1) return;
+
+			let scope = scopes[0];
+
+			// We're messing up start and end like crazy anyways, we just lie here
+			ast.body.splice(index, 1, node.declaration, {
+				type: "ExportNamedDeclaration",
+				start: node.start,
+				end: node.end,
+				declaration: null,
+				specifiers: pendingExports.map((name) => ({
+					type: "ExportSpecifier",
+					start: node.start,
+					end: node.end,
+					local: {
+						type: "Identifier",
+						start: node.start,
+						end: node.end,
+						name: scope.names.get(name)
+					},
+					exported: {
+						type: "Identifier",
+						start: node.start,
+						end: node.end,
+						name
+					}
+				})),
+				source: null,
+				attributes: []
+			});
+
+			pendingExports.length = 0;
 		},
 		Identifier
 	});

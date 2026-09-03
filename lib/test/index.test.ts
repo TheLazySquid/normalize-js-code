@@ -1,3 +1,4 @@
+/// <reference types="@types/bun" />
 import { test, expect } from "bun:test";
 import { normalizeJs } from "../src";
 import { join } from "node:path";
