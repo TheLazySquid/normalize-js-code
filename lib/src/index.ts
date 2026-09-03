@@ -14,15 +14,6 @@ export function normalizeJs(code: string) {
 	return generate(ast);
 }
 
-console.log(normalizeJs(`const thing = 5;
-export default thing;
-export { thing };
-export { thing as newName };
-export const thing2 = 10;
-export function thing3() {}
-export class thing4 {}
-export let { thing5, thing6: newName2, thing7: { thing8, thing9 } } = someObject;`))
-
 export function normalizeAst(ast: acorn.Program) {
 	let names: string[] = [];
 	let nameNumber = 0;
